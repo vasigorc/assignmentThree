@@ -105,7 +105,7 @@ public class YearMonthOps {
         int weekDayOfTheFirstDay = month.atDay(1).getDayOfWeek().getValue();
         //+padding before
         int paddingBefore;
-        paddingBefore = weekDayOfTheFirstDay - (weekDayOfTheFirstDay - 1);
+        paddingBefore = weekDayOfTheFirstDay - 1;
         for (int i = 0; i < paddingBefore; i++) {
             futureArray.add("  ");
         }
