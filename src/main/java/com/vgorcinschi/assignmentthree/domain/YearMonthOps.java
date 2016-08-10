@@ -27,11 +27,14 @@ public class YearMonthOps {
     private YearMonth month;
     private String[] array;
     private final String[] daysOfWeek = {"M ", "Tu", "W ", "Th", "F ", "Sa", "Su"};
+    private final String logPreffix;
     private final int id;
     private static final AtomicInteger ids = new AtomicInteger(1);
 
     private YearMonthOps() {
         id = ids.getAndIncrement();
+        logPreffix = this.getClass().getSimpleName() + " with id " + getId() + " ";
+        log.info(logPreffix+"was constructed.");
     }
 
     public YearMonthOps(int year, int month) {
@@ -66,7 +69,6 @@ public class YearMonthOps {
     }
 
     public boolean changeMonthBy(char operation, int months) {
-        String logPreffix = this.getClass().getSimpleName() + " with id " + getId() + " ";
         switch (operation) {
             case '-':
                 month = month.minusMonths((long) months % 12);

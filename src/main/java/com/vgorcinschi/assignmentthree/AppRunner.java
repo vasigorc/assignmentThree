@@ -13,7 +13,7 @@ import com.vgorcinschi.assignmentthree.domain.YearMonthOps;
  */
 public class AppRunner {
     public static void main(String[] args) {
-        YearMonthOps ym = new YearMonthOps(2016, 8);
+        YearMonthOps ym = new YearMonthOps(2016, 10);
         ym.displayCurrentMonthAsACalendar();
     }
 }
