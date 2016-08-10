@@ -26,7 +26,7 @@ public class YearMonthOps {
 
     private YearMonth month;
     private String[] array;
-    private final String[] daysOfWeek = {"M ", "Tu", "W ", "Th", "F ", "Sa", "Su"};
+    private final String[] daysOfWeek = {"Su", "M ", "Tu", "W ", "Th", "F ", "Sa"};
     private final String logPreffix;
     private final int id;
     private static final AtomicInteger ids = new AtomicInteger(1);
@@ -107,7 +107,7 @@ public class YearMonthOps {
         int weekDayOfTheFirstDay = month.atDay(1).getDayOfWeek().getValue();
         //+padding before
         int paddingBefore;
-        paddingBefore = weekDayOfTheFirstDay - 1;
+        paddingBefore = weekDayOfTheFirstDay;
         for (int i = 0; i < paddingBefore; i++) {
             futureArray.add("  ");
         }
