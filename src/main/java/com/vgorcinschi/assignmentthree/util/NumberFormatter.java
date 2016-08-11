@@ -8,6 +8,7 @@ package com.vgorcinschi.assignmentthree.util;
 import static java.lang.Double.parseDouble;
 import java.text.NumberFormat;
 import java.util.Scanner;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,9 +43,23 @@ public class NumberFormatter {
             }
         }
         NumberFormat formatter = NumberFormat.getNumberInstance();
+       
         formatter.setMaximumFractionDigits(precision);
-        log.info("A successful response has been provided for " + type + ": "
-                + parseDouble(formatter.format(response)));
-        return parseDouble(formatter.format(response));
+         
+//        log.info("A successful response has been provided for " + type + ": "
+//                + parseDouble(formatter.format(response)));
+        System.out.println("number format");
+        return response;
+    }
+
+    public static Integer additionalIntegerTests(Predicate<Integer> cond,
+            Supplier<String> validationMsg, Supplier<String> type, Scanner sc) {
+        int intermediary = validateDoubleValue(type, 2, sc).intValue();
+        System.out.println("intermediary is "+intermediary);
+        while (!cond.test(intermediary)) {
+            System.out.println(validationMsg.get());
+            intermediary = validateDoubleValue(type, 2, sc).intValue();
+        }
+        return intermediary;
     }
 }
