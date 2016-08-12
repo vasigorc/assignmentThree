@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,7 +21,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author vgorcinschi
  */
-public class YearMonthOps {
+public class YearMonthOps implements Comparable {
 
     private final Logger log = LogManager.getLogger("YearMonthOps");
 
@@ -34,7 +35,7 @@ public class YearMonthOps {
     private YearMonthOps() {
         id = ids.getAndIncrement();
         logPreffix = this.getClass().getSimpleName() + " with id " + getId() + " ";
-        log.info(logPreffix+"was constructed.");
+        log.info(logPreffix + "was constructed.");
     }
 
     public YearMonthOps(int year, int month) {
@@ -131,15 +132,44 @@ public class YearMonthOps {
     }
 
     public void displayCurrentMonthAsACalendar() {
-        System.out.println("\n"+month.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH)
+        System.out.println("\n" + month.getMonth().getDisplayName(TextStyle.FULL, Locale.ENGLISH)
                 + "\t" + month.getYear());
         System.out.println("--------------------");
-        for (int i = 1; i <=array.length; i++) {
-           System.out.print(array[i-1]+" ");
+        for (int i = 1; i <= array.length; i++) {
+            System.out.print(array[i - 1] + " ");
             if (i % 7 == 0) {
                 System.out.println("");
             }
-            
+
         }
+    }
+
+    /*
+        All following methods only compare the encapsulated yearmonth objects
+        which is the heart of this class
+    */
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof YearMonthOps)) {
+            return false;
+        }
+        YearMonthOps other = (YearMonthOps) obj;
+        return this.month.equals(other);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.month);
+        return hash;
+    }
+
+    @Override
+    public int compareTo(Object obj) {
+        if (obj == null || !(obj instanceof YearMonthOps)) {
+            return -1;
+        }
+        YearMonthOps other = (YearMonthOps) obj;
+        return this.month.compareTo((other.getMonth()));
     }
 }

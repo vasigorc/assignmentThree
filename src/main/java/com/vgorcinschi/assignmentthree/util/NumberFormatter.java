@@ -5,8 +5,6 @@
  */
 package com.vgorcinschi.assignmentthree.util;
 
-import static java.lang.Double.parseDouble;
-import java.text.NumberFormat;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -21,7 +19,7 @@ public class NumberFormatter {
 
     private static final Logger log = LogManager.getLogger();
 
-    public static Double validateDoubleValue(Supplier<String> type, int precision,
+    public static Double validateDoubleValue(Supplier<String> type,
             Scanner sc) {
         boolean responseReady = false;
         double response = 0;
@@ -42,23 +40,17 @@ public class NumberFormatter {
                 }
             }
         }
-        NumberFormat formatter = NumberFormat.getNumberInstance();
-       
-        formatter.setMaximumFractionDigits(precision);
-         
-//        log.info("A successful response has been provided for " + type + ": "
-//                + parseDouble(formatter.format(response)));
-        System.out.println("number format");
+        log.info("A successful response has been provided for " + type + ": "
+                + response);
         return response;
     }
 
     public static Integer additionalIntegerTests(Predicate<Integer> cond,
             Supplier<String> validationMsg, Supplier<String> type, Scanner sc) {
-        int intermediary = validateDoubleValue(type, 2, sc).intValue();
-        System.out.println("intermediary is "+intermediary);
+        int intermediary = validateDoubleValue(type, sc).intValue();
         while (!cond.test(intermediary)) {
             System.out.println(validationMsg.get());
-            intermediary = validateDoubleValue(type, 2, sc).intValue();
+            intermediary = validateDoubleValue(type, sc).intValue();
         }
         return intermediary;
     }
